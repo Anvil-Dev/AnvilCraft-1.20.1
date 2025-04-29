@@ -107,7 +107,7 @@ allprojects {
     if (System.getenv("CI_BUILD") == 'false') buildNumber = null
     else {
         if (System.getenv("PR_BUILD") != 'false') buildType = 'pr'
-        buildNumber = System.getenv("GITHUB_RUN_NUMBER")
+        buildNumber = (Integer.parseInt(System.getenv("GITHUB_RUN_NUMBER")) + 992)
     }
     version = "${mod_version}" + (buildNumber != null ? "+${buildType}.${buildNumber}" : "")
 
