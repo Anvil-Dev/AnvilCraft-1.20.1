@@ -5,14 +5,14 @@ import dev.dubhe.anvilcraft.client.gui.screen.inventory.BaseMachineScreen;
 import dev.dubhe.anvilcraft.init.ModNetworks;
 import dev.dubhe.anvilcraft.inventory.BaseMachineMenu;
 import lombok.Getter;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 @Getter
@@ -49,7 +49,7 @@ public class MachineOutputDirectionPack implements Packet {
     }
 
     @Override
-    @Environment(EnvType.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     public void handler() {
         Minecraft client = Minecraft.getInstance();
         client.execute(() -> {

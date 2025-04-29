@@ -23,6 +23,7 @@ public class AnvilCraftForge {
     /**
      * Forge 侧初始化
      */
+    @SuppressWarnings("removal")
     public AnvilCraftForge() {
         AnvilCraft.init();
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();

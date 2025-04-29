@@ -4,14 +4,14 @@ import dev.anvilcraft.lib.network.Packet;
 import dev.dubhe.anvilcraft.client.gui.screen.inventory.IFilterScreen;
 import dev.dubhe.anvilcraft.init.ModNetworks;
 import dev.dubhe.anvilcraft.inventory.IFilterMenu;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 public class SlotFilterChangePack implements Packet {
@@ -57,7 +57,7 @@ public class SlotFilterChangePack implements Packet {
     }
 
     @Override
-    @Environment(EnvType.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     public void handler() {
         Minecraft client = Minecraft.getInstance();
         client.execute(() -> {

@@ -33,8 +33,8 @@ public class DiskItem extends Item {
      */
     public static boolean hasDataStored(ItemStack stack) {
         return stack.getOrCreateTag().contains("DiskData")
-                && stack.getOrCreateTag().get("DiskData") instanceof CompoundTag
-                && !stack.getOrCreateTag().getCompound("DiskData").isEmpty();
+            && stack.getOrCreateTag().get("DiskData") instanceof CompoundTag
+            && !stack.getOrCreateTag().getCompound("DiskData").isEmpty();
     }
 
     public static CompoundTag getData(ItemStack stack) {
@@ -66,22 +66,23 @@ public class DiskItem extends Item {
 
     @Override
     public void appendHoverText(
-            @NotNull ItemStack stack,
-            @Nullable Level level,
-            @NotNull List<Component> tooltipComponents,
-            @NotNull TooltipFlag isAdvanced
+        @NotNull ItemStack stack,
+        @Nullable Level level,
+        @NotNull List<Component> tooltipComponents,
+        @NotNull TooltipFlag isAdvanced
     ) {
         super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
         if (hasDataStored(stack)) {
-            ResourceLocation storedFrom = new ResourceLocation(
-                    stack.getOrCreateTag()
-                            .getCompound("DiskData")
-                            .getString("StoredFrom")
+            ResourceLocation storedFrom = ResourceLocation.fromNamespaceAndPath(
+                "minecraft",
+                stack.getOrCreateTag()
+                    .getCompound("DiskData")
+                    .getString("StoredFrom")
             );
             String name = Component.translatable("block.anvilcraft." + storedFrom.getPath()).getString();
             tooltipComponents.add(
-                    Component.translatable("item.anvilcraft.disk.stored_from", name)
-                            .withStyle(Style.EMPTY.applyFormat(ChatFormatting.GRAY))
+                Component.translatable("item.anvilcraft.disk.stored_from", name)
+                    .withStyle(Style.EMPTY.applyFormat(ChatFormatting.GRAY))
             );
         }
     }
@@ -100,14 +101,14 @@ public class DiskItem extends Item {
             if (hasDataStored(stack)) {
                 CompoundTag tag = getData(stack);
                 if (!tag.getString("StoredFrom").equals(BuiltInRegistries.BLOCK_ENTITY_TYPE
-                        .getKey(blockEntity.getType())
-                        .toString())) return InteractionResult.PASS;
+                    .getKey(blockEntity.getType())
+                    .toString())) return InteractionResult.PASS;
                 diskCloneable.applyDiskData(tag);
             } else {
                 CompoundTag tag = createData(stack);
                 tag.putString(
-                        "StoredFrom",
-                        BuiltInRegistries.BLOCK_ENTITY_TYPE.getKey(blockEntity.getType()).toString()
+                    "StoredFrom",
+                    BuiltInRegistries.BLOCK_ENTITY_TYPE.getKey(blockEntity.getType()).toString()
                 );
                 diskCloneable.storeDiskData(tag);
             }

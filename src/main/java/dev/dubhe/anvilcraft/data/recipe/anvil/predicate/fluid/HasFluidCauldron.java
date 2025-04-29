@@ -58,7 +58,7 @@ public class HasFluidCauldron implements RecipePredicate {
         }
         this.offset = new Vec3(vec3[0], vec3[1], vec3[2]);
         String block = GsonHelper.getAsString(serializedRecipe, "match_block");
-        this.matchBlock = BuiltInRegistries.BLOCK.get(new ResourceLocation(block));
+        this.matchBlock = BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath("minecraft", block));
         this.deplete = GsonHelper.getAsInt(serializedRecipe, "deplete");
         if (!((this.matchBlock) instanceof LayeredCauldronBlock) && this.matchBlock != Blocks.LAVA_CAULDRON) {
             throw new IllegalStateException("match block is not layered cauldron block");

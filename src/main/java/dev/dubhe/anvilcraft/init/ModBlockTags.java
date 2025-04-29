@@ -57,11 +57,11 @@ public class ModBlockTags {
     );
 
     private static @NotNull TagKey<Block> bindC(String id) {
-        return TagKey.create(Registries.BLOCK, new ResourceLocation("c", id));
+        return TagKey.create(Registries.BLOCK,  ResourceLocation.fromNamespaceAndPath("c", id));
     }
 
     private static @NotNull TagKey<Block> bindForge(String id) {
-        return TagKey.create(Registries.BLOCK, new ResourceLocation("forge", id));
+        return TagKey.create(Registries.BLOCK,  ResourceLocation.fromNamespaceAndPath("forge", id));
     }
 
     private static @NotNull TagKey<Block> bind(String id) {

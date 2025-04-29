@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import dev.dubhe.anvilcraft.AnvilCraft;
 import lombok.Getter;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
@@ -72,12 +73,12 @@ public class MobTransformRecipe implements Recipe<MobTransformContainer> {
      * 生物转化配方
      */
     public MobTransformRecipe(
-            ResourceLocation id,
-            ResourceLocation input,
-            List<TransformResult> results,
-            Optional<List<NumericTagValuePredicate>> tagPredicates,
-            Optional<List<TagModification>> tagModifications,
-            Optional<List<TransformOptions>> options
+        ResourceLocation id,
+        ResourceLocation input,
+        List<TransformResult> results,
+        @NotNull Optional<List<NumericTagValuePredicate>> tagPredicates,
+        @NotNull Optional<List<TagModification>> tagModifications,
+        @NotNull Optional<List<TransformOptions>> options
     ) {
         this.id = id;
         this.results = results;
@@ -181,7 +182,7 @@ public class MobTransformRecipe implements Recipe<MobTransformContainer> {
     }
 
     public static Builder builder(String id) {
-        return new Builder(new ResourceLocation("anvilcraft", id));
+        return new Builder(AnvilCraft.of(id));
     }
 
     public enum Serializer implements RecipeSerializer<MobTransformRecipe> {

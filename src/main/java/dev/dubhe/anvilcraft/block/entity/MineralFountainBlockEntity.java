@@ -19,22 +19,25 @@ import java.util.HashMap;
 
 public class MineralFountainBlockEntity extends BlockEntity {
     private static final HashMap<ResourceLocation, HashMap<Block, Float>> CHANGE_MAP = new HashMap<>() {{
-            put(new ResourceLocation("overworld"), new HashMap<>() {{
-                    put(ModBlocks.VOID_STONE.get(), 0.01f);
-                    put(ModBlocks.EARTH_CORE_SHARD_ORE.get(), 0.01f);
-                }
-            });
-            put(new ResourceLocation("the_nether"), new HashMap<>() {{
-                    put(ModBlocks.VOID_STONE.get(), 0f);
-                    put(ModBlocks.EARTH_CORE_SHARD_ORE.get(), 0.2f);
-                }
-            });
-            put(new ResourceLocation("the_end"), new HashMap<>() {{
-                    put(ModBlocks.VOID_STONE.get(), 0.2f);
-                    put(ModBlocks.EARTH_CORE_SHARD_ORE.get(), 0f);
-                }
-            });
-        }};
+        put(ResourceLocation.fromNamespaceAndPath("minecraft", "overworld"), new HashMap<>() {
+            {
+                put(ModBlocks.VOID_STONE.get(), 0.01f);
+                put(ModBlocks.EARTH_CORE_SHARD_ORE.get(), 0.01f);
+            }
+        });
+        put(ResourceLocation.fromNamespaceAndPath("minecraft", "the_nether"), new HashMap<>() {
+            {
+                put(ModBlocks.VOID_STONE.get(), 0f);
+                put(ModBlocks.EARTH_CORE_SHARD_ORE.get(), 0.2f);
+            }
+        });
+        put(ResourceLocation.fromNamespaceAndPath("minecraft", "the_end"), new HashMap<>() {
+            {
+                put(ModBlocks.VOID_STONE.get(), 0.2f);
+                put(ModBlocks.EARTH_CORE_SHARD_ORE.get(), 0f);
+            }
+        });
+    }};
     private int tickCount = 0;
 
     public MineralFountainBlockEntity(BlockPos pos, BlockState blockState) {
@@ -42,7 +45,7 @@ public class MineralFountainBlockEntity extends BlockEntity {
     }
 
     public static @NotNull MineralFountainBlockEntity createBlockEntity(
-            BlockEntityType<?> type, BlockPos pos, BlockState blockState
+        BlockEntityType<?> type, BlockPos pos, BlockState blockState
     ) {
         return new MineralFountainBlockEntity(type, pos, blockState);
     }
@@ -62,8 +65,8 @@ public class MineralFountainBlockEntity extends BlockEntity {
         BlockState aroundBlock = getAroundBlock();
         // 冷却检查
         if (aroundBlock.is(Blocks.BLUE_ICE)
-                || aroundHas(Blocks.BEDROCK)
-                || aroundHas(ModBlocks.MINERAL_FOUNTAIN.get())) {
+            || aroundHas(Blocks.BEDROCK)
+            || aroundHas(ModBlocks.MINERAL_FOUNTAIN.get())) {
             level.destroyBlock(getBlockPos(), false);
             level.setBlockAndUpdate(getBlockPos(), Blocks.BEDROCK.defaultBlockState());
             return;
@@ -89,8 +92,8 @@ public class MineralFountainBlockEntity extends BlockEntity {
             level.setBlockAndUpdate(getBlockPos().above(), hotBlock.defaultBlockState());
         } else if (aroundBlock.is(ModBlockTags.DEEPSLATE_METAL) && aboveBlock.is(Blocks.DEEPSLATE)) {
             HashMap<Block, Float> changeMap = CHANGE_MAP.containsKey(level.dimension().location())
-                    ? CHANGE_MAP.get(level.dimension().location())
-                    : CHANGE_MAP.get(new ResourceLocation("overworld"));
+                ? CHANGE_MAP.get(level.dimension().location())
+                : CHANGE_MAP.get(ResourceLocation.fromNamespaceAndPath("minecraft", "overworld"));
             for (Block block : changeMap.keySet()) {
                 if (level.getRandom().nextDouble() <= changeMap.get(block)) {
                     level.setBlockAndUpdate(getBlockPos().above(), block.defaultBlockState());

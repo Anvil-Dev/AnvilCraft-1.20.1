@@ -23,31 +23,31 @@ public class LaserRenderer implements BlockEntityRenderer<BaseLaserBlockEntity> 
 
     @Override
     public void render(@NotNull BaseLaserBlockEntity blockEntity, float partialTick, @NotNull PoseStack poseStack,
-        @NotNull MultiBufferSource buffer, int packedLight, int packedOverlay) {
+                       @NotNull MultiBufferSource buffer, int packedLight, int packedOverlay) {
         if (blockEntity.getLevel() == null) return;
         if (blockEntity.irradiateBlockPos == null) return;
         final TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS)
-            .apply(new ResourceLocation("block/white_concrete"));
+            .apply(ResourceLocation.fromNamespaceAndPath("minecraft", "block/white_concrete"));
         poseStack.pushPose();
         poseStack.translate(0.5f, 0.5f, 0.5);
         float offest = 0;
         VertexConsumer consumer =
-                buffer.getBuffer(RenderType.translucent());
+            buffer.getBuffer(RenderType.translucent());
         float length =
-                (float) (blockEntity.irradiateBlockPos
-                        .getCenter()
-                        .distanceTo(blockEntity.getBlockPos().getCenter()) - 0.5);
+            (float) (blockEntity.irradiateBlockPos
+                .getCenter()
+                .distanceTo(blockEntity.getBlockPos().getCenter()) - 0.5);
         if (blockEntity instanceof RubyLaserBlockEntity) offest = 0.489f;
         poseStack.mulPose(blockEntity.getDirection().getRotation());
         renderBox(
-                consumer, poseStack,
-                -0.0625f, -offest, -0.0625f, 0.0625f, length, 0.0625f, sprite);
+            consumer, poseStack,
+            -0.0625f, -offest, -0.0625f, 0.0625f, length, 0.0625f, sprite);
         renderBox(
-                consumer, poseStack,
-                -0.0625f, length, -0.0625f, 0.0625f, length + 0.3f, 0.0625f, 0.35f, sprite);
+            consumer, poseStack,
+            -0.0625f, length, -0.0625f, 0.0625f, length + 0.3f, 0.0625f, 0.35f, sprite);
         renderBox(
-                consumer, poseStack,
-                -0.0625f, length + 0.3f, -0.0625f, 0.0625f, length + 0.57f, 0.0625f, 0.15f, sprite);
+            consumer, poseStack,
+            -0.0625f, length + 0.3f, -0.0625f, 0.0625f, length + 0.57f, 0.0625f, 0.15f, sprite);
         poseStack.popPose();
     }
 

@@ -1,14 +1,13 @@
 package dev.dubhe.anvilcraft.util;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
+import dev.dubhe.anvilcraft.util.forge.PlayerUtilImpl;
 import net.minecraft.world.entity.player.Player;
 
 public abstract class PlayerUtil {
     private PlayerUtil() {
     }
 
-    @ExpectPlatform
     public static boolean isFakePlayer(Player player) {
-        throw new AssertionError();
+        return PlayerUtilImpl.isFakePlayer(player);
     }
 }

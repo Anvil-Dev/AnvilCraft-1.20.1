@@ -1,5 +1,6 @@
 package dev.dubhe.anvilcraft.item;
 
+import dev.dubhe.anvilcraft.AnvilCraft;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -25,16 +26,10 @@ public class EmberMetalUpgradeTemplateItem extends SmithingTemplateItem {
     private static final Component UPGRADE_ADDITIONS_SLOT_DESCRIPTION =
         Component.translatable(
             "screen.anvilcraft.smithing_template.ember_metal_upgrade_smithing_template.additions_slot_description");
-    private static final ResourceLocation EMPTY_SLOT_PICKAXE = new ResourceLocation("item/empty_slot_pickaxe");
-    private static final ResourceLocation EMPTY_SLOT_INGOT = new ResourceLocation("item/empty_slot_ingot");
-    private static final ResourceLocation EMPTY_SLOT_HAMMER = new ResourceLocation(
-            "anvilcraft",
-            "item/empty_slot_hammer"
-    );
-    private static final ResourceLocation EMPTY_SLOT_BLOCK = new ResourceLocation(
-            "anvilcraft",
-            "item/empty_slot_block"
-    );
+    private static final ResourceLocation EMPTY_SLOT_PICKAXE = ResourceLocation.fromNamespaceAndPath("minecraft", "item/empty_slot_pickaxe");
+    private static final ResourceLocation EMPTY_SLOT_INGOT = ResourceLocation.fromNamespaceAndPath("minecraft", "item/empty_slot_ingot");
+    private static final ResourceLocation EMPTY_SLOT_HAMMER = AnvilCraft.of("item/empty_slot_hammer");
+    private static final ResourceLocation EMPTY_SLOT_BLOCK = AnvilCraft.of("item/empty_slot_block");
 
     /**
      * @param properties 物品属性

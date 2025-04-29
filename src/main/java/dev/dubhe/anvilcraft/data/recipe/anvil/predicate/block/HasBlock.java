@@ -147,7 +147,8 @@ public class HasBlock implements RecipePredicate {
             Set<Block> set = new HashSet<>();
             if (jsonArray != null) {
                 for (JsonElement jsonElement : jsonArray) {
-                    ResourceLocation resourceLocation = new ResourceLocation(
+                    ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(
+                        "minecraft",
                         GsonHelper.convertToString(jsonElement, "block")
                     );
                     set.add(
@@ -158,7 +159,10 @@ public class HasBlock implements RecipePredicate {
             }
             TagKey<Block> tag = null;
             if (jsonObject.has("tag")) {
-                ResourceLocation resourceLocation2 = new ResourceLocation(GsonHelper.getAsString(jsonObject, "tag"));
+                ResourceLocation resourceLocation2 = ResourceLocation.fromNamespaceAndPath(
+                    "minecraft",
+                    GsonHelper.getAsString(jsonObject, "tag")
+                );
                 tag = TagKey.create(Registries.BLOCK, resourceLocation2);
             }
             ModBlockPredicate predicate = new ModBlockPredicate().block(set.toArray(Block[]::new)).block(tag);

@@ -29,9 +29,9 @@ public class RoyalSmithingScreen extends ItemCombinerScreen<RoyalSmithingMenu> {
     private static final ResourceLocation ERROR =
         AnvilCraft.of("textures/gui/container/smithing/error.png");
     private static final ResourceLocation EMPTY_SLOT_SMITHING_TEMPLATE_ARMOR_TRIM =
-        new ResourceLocation("item/empty_slot_smithing_template_armor_trim");
+        ResourceLocation.fromNamespaceAndPath("minecraft", "item/empty_slot_smithing_template_armor_trim");
     private static final ResourceLocation EMPTY_SLOT_SMITHING_TEMPLATE_NETHERITE_UPGRADE =
-        new ResourceLocation("item/empty_slot_smithing_template_netherite_upgrade");
+        ResourceLocation.fromNamespaceAndPath("minecraft", "item/empty_slot_smithing_template_netherite_upgrade");
     private static final Component MISSING_TEMPLATE_TOOLTIP =
         Component.translatable("container.upgrade.missing_template_tooltip");
     private static final Component ERROR_TOOLTIP =

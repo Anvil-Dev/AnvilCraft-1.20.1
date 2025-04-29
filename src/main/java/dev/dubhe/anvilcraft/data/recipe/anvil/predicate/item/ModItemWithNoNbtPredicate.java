@@ -164,14 +164,14 @@ public class ModItemWithNoNbtPredicate {
         }
         if (object.has("tag")) {
             predicate.withTag(
-                    TagKey.create(Registries.ITEM, new ResourceLocation(GsonHelper.getAsString(object, "tag")))
+                    TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("minecraft",GsonHelper.getAsString(object, "tag")))
             );
         }
         if (object.has("items")) {
             JsonArray array = GsonHelper.getAsJsonArray(object, "items");
             for (JsonElement element : array) {
                 String id = GsonHelper.convertToString(element, "item");
-                Item item = BuiltInRegistries.ITEM.get(new ResourceLocation(id));
+                Item item = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath("minecraft",id));
                 predicate.with(item);
             }
         }

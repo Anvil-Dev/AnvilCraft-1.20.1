@@ -20,11 +20,12 @@ public class AnvilCraftRegistrateImpl extends AnvilCraftRegistrate {
         super(modId);
     }
 
-    public static @NotNull AnvilCraftRegistrate create(String modId) {
+    public static @NotNull AnvilCraftRegistrate create(@NotNull String modId) {
         return new AnvilCraftRegistrateImpl(modId);
     }
 
     @Override
+    @SuppressWarnings("removal")
     public void registerRegistrate() {
         registerEventListeners(FMLJavaModLoadingContext.get().getModEventBus());
     }
@@ -33,7 +34,7 @@ public class AnvilCraftRegistrateImpl extends AnvilCraftRegistrate {
     protected <P> NoConfigBuilder<CreativeModeTab, CreativeModeTab, P> createCreativeModeTab(
         P parent, String name, Consumer<CreativeModeTab.Builder> config
     ) {
-        var tab = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation(getModid(), name));
+        var tab = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath(getModid(), name));
         return this.generic(parent, name, Registries.CREATIVE_MODE_TAB, () -> {
             var builder = CreativeModeTab.builder()
                 .icon(

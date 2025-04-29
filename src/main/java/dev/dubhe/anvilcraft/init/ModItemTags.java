@@ -166,11 +166,11 @@ public class ModItemTags {
     public static final TagKey<Item> EXPLOSION_PROOF = bind("explosion_proof");
 
     public static @NotNull TagKey<Item> bindC(String id) {
-        return TagKey.create(Registries.ITEM, new ResourceLocation("c", id));
+        return TagKey.create(Registries.ITEM,  ResourceLocation.fromNamespaceAndPath("c", id));
     }
 
     public static @NotNull TagKey<Item> bindForge(String id) {
-        return TagKey.create(Registries.ITEM, new ResourceLocation("forge", id));
+        return TagKey.create(Registries.ITEM,  ResourceLocation.fromNamespaceAndPath("forge", id));
     }
 
     public static @NotNull TagKey<Item> bind(String id) {

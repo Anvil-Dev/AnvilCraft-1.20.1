@@ -63,6 +63,6 @@ public class AnvilCraft {
     }
 
     public static @NotNull ResourceLocation of(String path) {
-        return new ResourceLocation(MOD_ID, path);
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
 }

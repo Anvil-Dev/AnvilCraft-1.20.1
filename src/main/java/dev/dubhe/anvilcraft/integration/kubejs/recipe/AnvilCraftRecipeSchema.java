@@ -47,8 +47,8 @@ public interface AnvilCraftRecipeSchema {
     class AnvilCraftRecipeJs extends RecipeJS {
         @HideFromJS
         @Override
-        public RecipeJS id(ResourceLocation id) {
-            this.id = new ResourceLocation(
+        public RecipeJS id(@NotNull ResourceLocation id) {
+            this.id = ResourceLocation.fromNamespaceAndPath(
                 id.getNamespace().equals("minecraft") ? this.type.id.getNamespace() : id.getNamespace(),
                 "%s/%s".formatted(this.type.id.getPath(), id.getPath())
             );

@@ -100,7 +100,7 @@ public class SmithingRecipesLoader {
             )
             .save(
                 provider,
-                new ResourceLocation("anvilcraft", "anvil_hammer_upgrade")
+                AnvilCraft.of("anvil_hammer_upgrade")
             );
 
         SmithingTransformRecipeBuilder.smithing(Ingredient.of(ModItems.EMBER_METAL_UPGRADE_SMITHING_TEMPLATE),
@@ -184,7 +184,7 @@ public class SmithingRecipesLoader {
                 )
                 .save(
                         provider,
-                        new ResourceLocation("anvilcraft", "ember_metal_anvil_hammer_upgrade")
+                        AnvilCraft.of("anvil_hammer_upgrade")
             );
     }
 }

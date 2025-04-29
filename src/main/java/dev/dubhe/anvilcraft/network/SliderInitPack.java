@@ -3,11 +3,11 @@ package dev.dubhe.anvilcraft.network;
 import dev.anvilcraft.lib.network.Packet;
 import dev.dubhe.anvilcraft.client.gui.screen.inventory.SliderScreen;
 import dev.dubhe.anvilcraft.init.ModNetworks;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 public class SliderInitPack implements Packet {
@@ -48,7 +48,7 @@ public class SliderInitPack implements Packet {
     }
 
     @Override
-    @Environment(EnvType.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     public void handler() {
         Minecraft client = Minecraft.getInstance();
         client.execute(() -> {

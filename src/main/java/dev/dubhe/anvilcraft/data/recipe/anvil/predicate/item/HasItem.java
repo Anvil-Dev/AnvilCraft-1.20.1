@@ -353,13 +353,17 @@ public class HasItem implements RecipePredicate, HasData {
             }
             if (object.has("tag")) {
                 predicate.withTag(
-                    TagKey.create(Registries.ITEM, new ResourceLocation(GsonHelper.getAsString(object, "tag")))
+                    TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(
+                        "minecraft", GsonHelper.getAsString(object, "tag")
+                    ))
                 );
             }
             if (object.has("enchantments")) {
                 JsonObject enchants = GsonHelper.getAsJsonObject(object, "enchantments");
                 for (Map.Entry<String, JsonElement> entry : enchants.entrySet()) {
-                    Enchantment enchantment = BuiltInRegistries.ENCHANTMENT.get(new ResourceLocation(entry.getKey()));
+                    Enchantment enchantment = BuiltInRegistries.ENCHANTMENT.get(ResourceLocation.fromNamespaceAndPath(
+                        "minecraft", entry.getKey()
+                    ));
                     if (enchantment == null) continue;
                     MinMaxBounds.Ints levels = MinMaxBounds.Ints.fromJson(entry.getValue());
                     predicate.withEnchantments(levels, enchantment);
@@ -369,7 +373,7 @@ public class HasItem implements RecipePredicate, HasData {
                 JsonArray array = GsonHelper.getAsJsonArray(object, "items");
                 for (JsonElement element : array) {
                     String id = GsonHelper.convertToString(element, "item");
-                    Item item = BuiltInRegistries.ITEM.get(new ResourceLocation(id));
+                    Item item = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath("minecraft", id));
                     predicate.with(item);
                 }
             }

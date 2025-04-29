@@ -15,6 +15,7 @@ import net.minecraft.nbt.TagParser;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import org.apache.commons.lang3.ArrayUtils;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * 生物转换配方架构
@@ -24,8 +25,8 @@ public interface MobTransformRecipeSchema {
     class MobTransformRecipeJs extends RecipeJS {
         @HideFromJS
         @Override
-        public RecipeJS id(ResourceLocation id) {
-            this.id = new ResourceLocation(
+        public RecipeJS id(@NotNull ResourceLocation id) {
+            this.id = ResourceLocation.fromNamespaceAndPath(
                     id.getNamespace().equals("minecraft") ? this.type.id.getNamespace() : id.getNamespace(),
                     "%s/%s".formatted(this.type.id.getPath(), id.getPath())
             );

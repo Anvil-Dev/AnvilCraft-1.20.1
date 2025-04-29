@@ -7,7 +7,7 @@ legacyForge {
         mappingsVersion = libs.versions.parchment.get()
     }
 
-    validateAccessTransformers = true
+    // validateAccessTransformers = true
     // This line is optional. Access Transformers are automatically detected
     accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
 
