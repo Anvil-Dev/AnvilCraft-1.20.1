@@ -1,0 +1,58 @@
+dependencies {
+    // Registrate
+    api(libs.registrate)
+    jarJar(libs.registrate)
+
+    // AnvilLib
+    implementation(libs.anvilLib)
+    jarJar(libs.anvilLib)
+
+    // JEI
+    compileOnlyApi(libs.jeiCommonApi) { transitive = false }
+    compileOnlyApi(libs.jeiForgeApi) { transitive = false }
+    implementation(libs.jeiForgeImpl) { transitive = false }
+
+    // REI
+    compileOnlyApi(libs.reiPlugin)
+    compileOnlyApi(libs.reiApi)
+    compileOnly(libs.reiForge)
+
+    // EMI
+    compileOnlyApi "dev.emi:emi-forge:${libs.versions.emi.get()}:api"
+    compileOnlyApi(libs.emi)
+
+    // Jade
+    compileOnly(libs.jade)
+
+    // KJS
+    compileOnly(libs.kubejs)
+
+    // WTHIT
+    compileOnly(libs.wthitApi)
+    runtimeOnly(libs.wthit)
+    runtimeOnly(libs.badpackets)
+
+    // Zeta
+    compileOnly(libs.zeta)
+
+    // Mixin Extras
+    implementation(libs.mixinextrasCommon)
+    implementation(libs.mixinextrasForge)
+
+    // cloth config api
+    implementation(libs.clothConfig)
+    jarJar(libs.clothConfig)
+
+    // Patchouli
+    implementation(libs.patchouli)
+
+    // Create
+    implementation(libs.flywheel)
+    compileOnly(libs.create) {
+        exclude group: "io.github.llamalad7"
+        transitive = false
+    }
+
+    // Annotations
+    implementation(libs.annotations)
+}
