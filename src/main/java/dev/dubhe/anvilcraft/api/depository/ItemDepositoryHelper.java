@@ -1,6 +1,6 @@
 package dev.dubhe.anvilcraft.api.depository;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
+import dev.dubhe.anvilcraft.api.depository.forge.ItemDepositoryHelperImpl;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
 import net.minecraft.core.BlockPos;
@@ -26,9 +26,8 @@ public class ItemDepositoryHelper {
      * @param direction 输入方向
      * @return 物品存储
      */
-    @ExpectPlatform
     public static @Nullable IItemDepository getItemDepository(Level level, BlockPos pos, Direction direction) {
-        throw new AssertionError();
+        return ItemDepositoryHelperImpl.getItemDepository(level, pos, direction);
     }
 
     /**
@@ -53,10 +52,10 @@ public class ItemDepositoryHelper {
      */
     @SuppressWarnings("DuplicatedCode")
     public static boolean exportToTarget(
-            @NotNull IItemDepository source,
-            int maxAmount,
-            Predicate<ItemStack> predicate,
-            IItemDepository target
+        @NotNull IItemDepository source,
+        int maxAmount,
+        Predicate<ItemStack> predicate,
+        IItemDepository target
     ) {
         boolean hasDone = false;
         for (int srcIndex = 0; srcIndex < source.getSlots(); srcIndex++) {
@@ -118,10 +117,10 @@ public class ItemDepositoryHelper {
      */
     @SuppressWarnings("DuplicatedCode")
     public static boolean importToTarget(
-            IItemDepository target,
-            int maxAmount,
-            Predicate<ItemStack> predicate,
-            @NotNull IItemDepository source
+        IItemDepository target,
+        int maxAmount,
+        Predicate<ItemStack> predicate,
+        @NotNull IItemDepository source
     ) {
         boolean hasDone = false;
         for (int srcIndex = 0; srcIndex < source.getSlots(); srcIndex++) {

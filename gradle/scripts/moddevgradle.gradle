@@ -7,6 +7,7 @@ legacyForge {
         mappingsVersion = libs.versions.parchment.get()
     }
 
+    validateAccessTransformers=true
     // This line is optional. Access Transformers are automatically detected
     accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -78,4 +79,9 @@ idea {
         downloadSources = true
         downloadJavadoc = true
     }
+}
+
+mixin {
+    add sourceSets.main, 'mixins.anvilcraft.refmap.json'
+    config 'mixins.anvilcraft.json' // This can be done for multiple configs
 }

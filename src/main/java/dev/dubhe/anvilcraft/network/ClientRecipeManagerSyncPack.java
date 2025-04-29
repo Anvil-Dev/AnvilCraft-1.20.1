@@ -12,11 +12,11 @@ import dev.emi.emi.runtime.EmiReloadManager;
 import lombok.Getter;
 import me.shedaniel.rei.api.client.REIRuntime;
 import me.shedaniel.rei.api.common.registry.ReloadStage;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -84,7 +84,7 @@ public class ClientRecipeManagerSyncPack implements Packet {
     }
 
     @Override
-    @Environment(EnvType.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     public void handler() {
         Minecraft.getInstance().execute(() -> AnvilRecipeManager.setAnvilRecipeList(this.anvilRecipes));
         if (this.isLoaded("me/shedaniel/rei/impl/client/gui/screen/DefaultDisplayViewingScreen.class")) {

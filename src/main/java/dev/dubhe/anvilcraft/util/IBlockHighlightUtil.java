@@ -6,8 +6,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import dev.dubhe.anvilcraft.AnvilCraft;
 import lombok.Data;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Camera;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -16,6 +14,8 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3i;
 import org.joml.Vector3ic;
@@ -28,7 +28,7 @@ import java.util.OptionalDouble;
  * 方块高亮
  */
 public interface IBlockHighlightUtil {
-    @Environment(EnvType.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     RenderType NO_DEPTH =
         RenderType.create(AnvilCraft.MOD_ID + "_no_depth", DefaultVertexFormat.POSITION_COLOR_NORMAL,
             VertexFormat.Mode.LINES, 256, true, true, RenderType.CompositeState.builder()
@@ -67,7 +67,7 @@ public interface IBlockHighlightUtil {
      * @param poseStack 渲染空间
      * @param camera    相机
      */
-    @Environment(EnvType.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     static void render(
         Level level, @NotNull MultiBufferSource consumers, @NotNull PoseStack poseStack, @NotNull Camera camera
     ) {

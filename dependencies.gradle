@@ -55,4 +55,7 @@ dependencies {
 
     // Annotations
     implementation(libs.annotations)
+
+    // Mixin
+    annotationProcessor "org.spongepowered:mixin:${libs.versions.mixin.get()}:processor"
 }

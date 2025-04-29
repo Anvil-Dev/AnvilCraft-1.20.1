@@ -1,6 +1,5 @@
 package dev.dubhe.anvilcraft.block.entity;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
 import dev.dubhe.anvilcraft.AnvilCraft;
 import dev.dubhe.anvilcraft.api.item.IDiskCloneable;
 import dev.dubhe.anvilcraft.api.depository.FilteredItemDepository;
@@ -9,6 +8,7 @@ import dev.dubhe.anvilcraft.api.depository.ItemDepositoryHelper;
 import dev.dubhe.anvilcraft.api.power.IPowerConsumer;
 import dev.dubhe.anvilcraft.api.power.PowerGrid;
 import dev.dubhe.anvilcraft.block.AutoCrafterBlock;
+import dev.dubhe.anvilcraft.block.entity.forge.AutoCrafterBlockEntityImpl;
 import dev.dubhe.anvilcraft.init.ModBlocks;
 import dev.dubhe.anvilcraft.init.ModMenuTypes;
 import dev.dubhe.anvilcraft.inventory.AutoCrafterMenu;
@@ -36,6 +36,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
@@ -69,16 +70,14 @@ public class AutoCrafterBlockEntity extends BaseMachineBlockEntity implements
         super(type, pos, blockState);
     }
 
-    @ExpectPlatform
-    public static AutoCrafterBlockEntity createBlockEntity(
-            BlockEntityType<?> type, BlockPos pos, BlockState blockState
+    public static @NotNull AutoCrafterBlockEntity createBlockEntity(
+        BlockEntityType<?> type, BlockPos pos, BlockState blockState
     ) {
-        throw new AssertionError();
+        return AutoCrafterBlockEntityImpl.createBlockEntity(type, pos, blockState);
     }
 
-    @ExpectPlatform
     public static void onBlockEntityRegister(BlockEntityType<AutoCrafterBlockEntity> type) {
-        throw new AssertionError();
+        AutoCrafterBlockEntityImpl.onBlockEntityRegister(type);
     }
 
     /**
@@ -111,9 +110,9 @@ public class AutoCrafterBlockEntity extends BaseMachineBlockEntity implements
         if (!canCraft()) return;
         ItemStack result;
         Optional<AutoCrafterCache> cacheOptional = cache
-                .stream()
-                .filter(recipe -> recipe.test(craftingContainer))
-                .findFirst();
+            .stream()
+            .filter(recipe -> recipe.test(craftingContainer))
+            .findFirst();
         Optional<CraftingRecipe> optional;
         NonNullList<ItemStack> remaining;
         if (cacheOptional.isPresent()) {
@@ -147,7 +146,7 @@ public class AutoCrafterBlockEntity extends BaseMachineBlockEntity implements
         result.setCount(result.getCount() * times);
         remaining.forEach(stack -> stack.setCount(stack.getCount() * times));
         IItemDepository itemDepository = ItemDepositoryHelper.getItemDepository(
-                level, getBlockPos().relative(getDirection()), getDirection().getOpposite()
+            level, getBlockPos().relative(getDirection()), getDirection().getOpposite()
         );
         if (itemDepository != null) {
             // 尝试向容器插入物品
@@ -279,7 +278,7 @@ public class AutoCrafterBlockEntity extends BaseMachineBlockEntity implements
          * @param remaining 返还物品
          */
         public AutoCrafterCache(
-                @NotNull Container container, Optional<CraftingRecipe> recipe, NonNullList<ItemStack> remaining
+            @NotNull Container container, Optional<CraftingRecipe> recipe, NonNullList<ItemStack> remaining
         ) {
             this.container = new SimpleContainer(container.getContainerSize());
             for (int i = 0; i < container.getContainerSize(); i++) {
@@ -307,9 +306,9 @@ public class AutoCrafterBlockEntity extends BaseMachineBlockEntity implements
         Level level = this.getLevel();
         if (level == null) return;
         ItemEntity itemEntity = new ItemEntity(
-                level, center.x, center.y, center.z,
-                stack,
-                0.25 * step.x, 0.25 * step.y, 0.25 * step.z
+            level, center.x, center.y, center.z,
+            stack,
+            0.25 * step.x, 0.25 * step.y, 0.25 * step.z
         );
         itemEntity.setDefaultPickUpDelay();
         level.addFreshEntity(itemEntity);

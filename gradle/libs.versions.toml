@@ -21,6 +21,7 @@ patchouli = "1.20.1-84-FORGE"
 flywheel = "0.6.10-7"
 create = "0.5.1.f-27"
 annotations = "24.1.0"
+mixin = "0.8.5"
 
 [libraries]
 forge = { group = "net.minecraftforge", name = "forge", version.ref = "forge" }

@@ -1,6 +1,6 @@
 package dev.dubhe.anvilcraft.util;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
+import dev.dubhe.anvilcraft.util.forge.UtilsImpl;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
@@ -22,9 +22,8 @@ public abstract class Utils {
     /**
      * @return 模组是否加载
      */
-    @ExpectPlatform
     public static boolean isLoaded(String modid) {
-        throw new AssertionError();
+        return UtilsImpl.isLoaded(modid);
     }
 
     /**

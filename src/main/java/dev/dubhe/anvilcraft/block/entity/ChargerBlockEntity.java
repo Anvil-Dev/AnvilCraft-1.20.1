@@ -1,6 +1,5 @@
 package dev.dubhe.anvilcraft.block.entity;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
 import dev.dubhe.anvilcraft.api.depository.FilteredItemDepository;
 import dev.dubhe.anvilcraft.api.item.IChargerChargeable;
 import dev.dubhe.anvilcraft.api.item.IChargerDischargeable;
@@ -9,6 +8,8 @@ import dev.dubhe.anvilcraft.api.power.IPowerProducer;
 import dev.dubhe.anvilcraft.api.power.PowerComponentType;
 import dev.dubhe.anvilcraft.api.power.PowerGrid;
 import dev.dubhe.anvilcraft.block.ChargerBlock;
+import dev.dubhe.anvilcraft.block.entity.forge.BatchCrafterBlockEntityImpl;
+import dev.dubhe.anvilcraft.block.entity.forge.ChargerBlockEntityImpl;
 import dev.dubhe.anvilcraft.init.ModBlocks;
 import dev.dubhe.anvilcraft.init.ModItems;
 import dev.dubhe.anvilcraft.util.StateListener;
@@ -192,15 +193,14 @@ public class ChargerBlockEntity
         cd = 0;
     }
 
-    @ExpectPlatform
     public static @NotNull ChargerBlockEntity createBlockEntity(
             BlockEntityType<?> type, BlockPos pos, BlockState blockState
     ) {
-        return null;
+        return ChargerBlockEntityImpl.createBlockEntity(type, pos, blockState);
     }
 
-    @ExpectPlatform
     public static void onBlockEntityRegister(BlockEntityType<ChargerBlockEntity> type) {
+        ChargerBlockEntityImpl.onBlockEntityRegister(type);
     }
 
     /**

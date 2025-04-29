@@ -1,23 +1,22 @@
 package dev.dubhe.anvilcraft.api.entity.attribute;
 
 import com.google.common.collect.Multimap;
-import dev.architectury.injectables.annotations.ExpectPlatform;
+import dev.dubhe.anvilcraft.api.entity.attribute.forge.EntityReachAttributeImpl;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
 public class EntityReachAttribute {
 
-    @ExpectPlatform
-    public static Supplier<Multimap<Attribute, AttributeModifier>> getRangeModifierSupplier(
-            AttributeModifier modifier
+    public static @NotNull Supplier<Multimap<Attribute, AttributeModifier>> getRangeModifierSupplier(
+        @NotNull AttributeModifier modifier
     ) {
-        return null;
+        return EntityReachAttributeImpl.getRangeModifierSupplier(modifier);
     }
 
-    @ExpectPlatform
-    public static Attribute getReachAttribute() {
-        return null;
+    public static @NotNull Attribute getReachAttribute() {
+        return EntityReachAttributeImpl.getReachAttribute();
     }
 }

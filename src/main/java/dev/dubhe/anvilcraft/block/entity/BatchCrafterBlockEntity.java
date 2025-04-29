@@ -1,6 +1,5 @@
 package dev.dubhe.anvilcraft.block.entity;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
 import dev.dubhe.anvilcraft.AnvilCraft;
 import dev.dubhe.anvilcraft.api.IHasDisplayItem;
 import dev.dubhe.anvilcraft.api.item.IDiskCloneable;
@@ -10,6 +9,7 @@ import dev.dubhe.anvilcraft.api.depository.ItemDepositoryHelper;
 import dev.dubhe.anvilcraft.api.power.IPowerConsumer;
 import dev.dubhe.anvilcraft.api.power.PowerGrid;
 import dev.dubhe.anvilcraft.block.BatchCrafterBlock;
+import dev.dubhe.anvilcraft.block.entity.forge.BatchCrafterBlockEntityImpl;
 import dev.dubhe.anvilcraft.init.ModBlocks;
 import dev.dubhe.anvilcraft.init.ModMenuTypes;
 import dev.dubhe.anvilcraft.inventory.BatchCrafterMenu;
@@ -101,16 +101,14 @@ public class BatchCrafterBlockEntity
         id = COUNTER.incrementAndGet();
     }
 
-    @ExpectPlatform
-    public static BatchCrafterBlockEntity createBlockEntity(
+    public static @NotNull BatchCrafterBlockEntity createBlockEntity(
             BlockEntityType<?> type, BlockPos pos, BlockState blockState
     ) {
-        throw new AssertionError();
+        return BatchCrafterBlockEntityImpl.createBlockEntity(type, pos, blockState);
     }
 
-    @ExpectPlatform
     public static void onBlockEntityRegister(BlockEntityType<BatchCrafterBlockEntity> type) {
-        throw new AssertionError();
+        BatchCrafterBlockEntityImpl.onBlockEntityRegister(type);
     }
 
     /**

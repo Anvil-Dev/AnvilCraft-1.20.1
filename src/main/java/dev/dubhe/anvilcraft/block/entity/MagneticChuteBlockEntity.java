@@ -1,12 +1,10 @@
 package dev.dubhe.anvilcraft.block.entity;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
-import dev.dubhe.anvilcraft.api.depository.FilteredItemDepository;
 import dev.dubhe.anvilcraft.block.MagneticChuteBlock;
+import dev.dubhe.anvilcraft.block.entity.forge.MagneticChuteBlockEntityImpl;
 import dev.dubhe.anvilcraft.init.ModBlocks;
 import dev.dubhe.anvilcraft.init.ModMenuTypes;
 import dev.dubhe.anvilcraft.inventory.MagneticChuteMenu;
-import lombok.Getter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -60,18 +58,16 @@ public class MagneticChuteBlockEntity extends BaseChuteBlockEntity {
         return getOutputDirection().getOpposite();
     }
 
-    @ExpectPlatform
     public static MagneticChuteBlockEntity createBlockEntity(
             BlockEntityType<?> type,
             BlockPos pos,
             BlockState blockState
     ) {
-        throw new AssertionError();
+        return MagneticChuteBlockEntityImpl.createBlockEntity(type, pos, blockState);
     }
 
-    @ExpectPlatform
     public static void onBlockEntityRegister(BlockEntityType<MagneticChuteBlockEntity> type) {
-        throw new AssertionError();
+        MagneticChuteBlockEntityImpl.onBlockEntityRegister(type);
     }
 
     @Override

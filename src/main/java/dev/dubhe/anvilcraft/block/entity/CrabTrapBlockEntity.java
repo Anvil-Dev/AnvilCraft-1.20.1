@@ -1,14 +1,15 @@
 package dev.dubhe.anvilcraft.block.entity;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
 import dev.dubhe.anvilcraft.api.depository.DepositoryHolder;
 import dev.dubhe.anvilcraft.api.depository.ItemDepository;
+import dev.dubhe.anvilcraft.block.entity.forge.CrabTrapBlockEntityImpl;
 import lombok.Getter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 @Getter
 public class CrabTrapBlockEntity extends BlockEntity implements DepositoryHolder {
@@ -18,26 +19,24 @@ public class CrabTrapBlockEntity extends BlockEntity implements DepositoryHolder
 
     private final ItemDepository depository = new ItemDepository(9);
 
-    @ExpectPlatform
-    public static CrabTrapBlockEntity createBlockEntity(
+    public static @NotNull CrabTrapBlockEntity createBlockEntity(
         BlockEntityType<?> type, BlockPos pos, BlockState blockState
     ) {
-        throw new AssertionError();
+        return CrabTrapBlockEntityImpl.createBlockEntity(type, pos, blockState);
     }
 
-    @ExpectPlatform
     public static void onBlockEntityRegister(BlockEntityType<CrabTrapBlockEntity> type) {
-        throw new AssertionError();
+        CrabTrapBlockEntityImpl.onBlockEntityRegister(type);
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag) {
+    protected void saveAdditional(@NotNull CompoundTag tag) {
         super.saveAdditional(tag);
         tag.put("Inventory", depository.serializeNbt());
     }
 
     @Override
-    public void load(CompoundTag tag) {
+    public void load(@NotNull CompoundTag tag) {
         super.load(tag);
         depository.deserializeNbt(tag.getCompound("Inventory"));
     }

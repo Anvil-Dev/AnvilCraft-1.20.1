@@ -4,16 +4,16 @@ import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.builders.Builder;
 import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.builders.NoConfigBuilder;
-import com.tterrag.registrate.fabric.RegistryObject;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
-import dev.architectury.injectables.annotations.ExpectPlatform;
+import dev.dubhe.anvilcraft.api.registry.forge.AnvilCraftRegistrateImpl;
 import dev.dubhe.anvilcraft.util.IFormattingUtil;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,17 +30,16 @@ public abstract class AnvilCraftRegistrate extends Registrate {
     }
 
     @NotNull
-    @ExpectPlatform
-    public static AnvilCraftRegistrate create(String modId) {
-        throw new AssertionError();
+    public static AnvilCraftRegistrate create(@NotNull String modId) {
+        return AnvilCraftRegistrateImpl.create(modId);
     }
 
     public abstract void registerRegistrate();
 
     @Override
     public <T extends Item> @NotNull ItemBuilder<T, Registrate> item(
-        String name,
-        NonNullFunction<Item.Properties, T> factory
+        @NotNull String name,
+        @NotNull NonNullFunction<Item.Properties, T> factory
     ) {
         return super.item(name, factory).lang(IFormattingUtil.toEnglishName(name.replaceAll("/.", "_")));
     }
@@ -66,11 +65,11 @@ public abstract class AnvilCraftRegistrate extends Registrate {
 
     @Override
     protected <R, T extends R> @NotNull RegistryEntry<T> accept(
-        String name,
-        ResourceKey<? extends Registry<R>> type,
-        Builder<R, T, ?, ?> builder,
-        NonNullSupplier<? extends T> creator,
-        NonNullFunction<RegistryObject<T>, ? extends RegistryEntry<T>> entryFactory
+        @NotNull String name,
+        @NotNull ResourceKey<? extends Registry<R>> type,
+        @NotNull Builder<R, T, ?, ?> builder,
+        @NotNull NonNullSupplier<? extends T> creator,
+        @NotNull NonNullFunction<RegistryObject<T>, ? extends RegistryEntry<T>> entryFactory
     ) {
         RegistryEntry<T> entry = super.accept(name, type, builder, creator, entryFactory);
 
@@ -83,7 +82,7 @@ public abstract class AnvilCraftRegistrate extends Registrate {
 
     @Override
     public <P> @NotNull NoConfigBuilder<CreativeModeTab, CreativeModeTab, P> defaultCreativeTab(
-        P parent, String name, Consumer<CreativeModeTab.Builder> config
+        @NotNull P parent, @NotNull String name, @NotNull Consumer<CreativeModeTab.Builder> config
     ) {
         return createCreativeModeTab(parent, name, config);
     }
